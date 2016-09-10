@@ -1,0 +1,12 @@
+.boarding-pass {
+  padding: 40px;
+  background: snow;
+  margin: 20px 0;
+  border: 1px solid #2994E6;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.boarding-pass:hover {
+  cursor: pointer;
+  border-color: #073590;
+}
