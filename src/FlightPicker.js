@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AirportSelector from './AirportSelector';
 import DatePicker from './DatePicker';
 import SubmitButton from './SubmitButton';
@@ -6,49 +7,14 @@ import './css/flight-picker.css';
 
 class FlightPicker extends Component {
 
-  originChanged(event) {
-    this.props.store.dispatch({
-      type: 'UPDATE_ORIGIN',
-      payload: event.target.value
-    });
-  }
-
-  destinationChanged(event) {
-    this.props.store.dispatch({
-      type: 'UPDATE_DESTINATION',
-      payload: event.target.value
-    });
-  }
-
-  fromDateChanged(datetime) {
-    this.props.store.dispatch({
-      type: 'UPDATE_FROM_DATE',
-      payload: datetime
-    });
-  }
-
-  toDateChanged(datetime) {
-    this.props.store.dispatch({
-      type: 'UPDATE_TO_DATE',
-      payload: datetime
-    });
-  }
-
   findFlights() {
-
-    const { basket } = this.props.store.getState();
-    const { origin, destination, fromDate, toDate } = basket;
-
-    this.props.store.dispatch({
-      type: 'FETCH_FLIGHTS',
-      payload: { origin, destination, fromDate, toDate }
-    });
-
+    const { origin, destination, fromDate, toDate } = this.props.basket;
+    this.props.fetchFlights(origin, destination, fromDate, toDate);
   }
 
   render() {
 
-    const { basket, booking } = this.props.store.getState();
+    const { basket, booking } = this.props;
 
     const { origin, destination, fromDate, toDate } = basket;
     const { airports, routes } = booking.data;
@@ -65,7 +31,7 @@ class FlightPicker extends Component {
             title="From"
             value={ origin }
             airports={ airports }
-            onChange={ this.originChanged.bind(this) }
+            onChange={ this.props.originChanged.bind(this) }
           />
 
           <AirportSelector
@@ -75,7 +41,7 @@ class FlightPicker extends Component {
             airports={ airports }
             origin={ origin }
             routes={ routes }
-            onChange={ this.destinationChanged.bind(this) }
+            onChange={ this.props.destinationChanged.bind(this) }
           />
 
         </div>
@@ -84,12 +50,12 @@ class FlightPicker extends Component {
 
           <DatePicker
             placeholder="From Date"
-            onSelect={ this.fromDateChanged.bind(this) }
+            onSelect={ this.props.fromDateChanged.bind(this) }
            />
 
           <DatePicker
             placeholder="To Date"
-            onSelect={ this.toDateChanged.bind(this) }
+            onSelect={ this.props.toDateChanged.bind(this) }
           />
 
         </div>
@@ -111,4 +77,46 @@ class FlightPicker extends Component {
 
 }
 
-export default FlightPicker;
+const mapStateToProps = (state) => {
+  return {
+    basket: state.basket,
+    booking: state.booking
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    originChanged: (event) => {
+      dispatch({
+        type: 'UPDATE_ORIGIN',
+        payload: event.target.value
+      });
+    },
+    destinationChanged: (event) => {
+      dispatch({
+        type: 'UPDATE_DESTINATION',
+        payload: event.target.value
+      });
+    },
+    fromDateChanged: (datetime) => {
+      dispatch({
+        type: 'UPDATE_FROM_DATE',
+        payload: datetime
+      });
+    },
+    toDateChanged: (datetime) => {
+      dispatch({
+        type: 'UPDATE_TO_DATE',
+        payload: datetime
+      });
+    },
+    fetchFlights: (origin, destination, fromDate, toDate) => {
+      dispatch({
+        type: 'FETCH_FLIGHTS',
+        payload: { origin, destination, fromDate, toDate }
+      });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlightPicker);

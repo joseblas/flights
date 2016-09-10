@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import BoardingPass from './BoardingPass';
 import './css/flight-results.css';
 
@@ -6,9 +7,7 @@ class FlightResults extends Component {
 
   getBoardingPasses() {
 
-    const state = this.props.store.getState();
-
-    let { flights } = state.flights.data;
+    let { flights } = this.props.flights.data;
     flights.sort((a, b) => a.price - b.price);
 
     if (flights.length === 0) {
@@ -27,7 +26,7 @@ class FlightResults extends Component {
 
   render() {
 
-    const { flights } = this.props.store.getState();
+    const { flights } = this.props;
 
     if (flights.fetched === false) {
       return null;
@@ -44,4 +43,10 @@ class FlightResults extends Component {
 
 }
 
-export default FlightResults;
+const mapStateToProps = (state) => {
+  return {
+    flights: state.flights
+  }
+};
+
+export default connect(mapStateToProps)(FlightResults);

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FlightPicker from './FlightPicker';
 import FlightResults from './FlightResults';
 
 class Application extends Component {
 
   componentDidMount() {
-    this.props.store.dispatch({
-      type: 'FETCH_BOOKING_DATA'
-    });
+    this.props.fetchData();
   }
 
   render() {
@@ -16,12 +15,19 @@ class Application extends Component {
         <header className="main-header">
 
         </header>
-        <FlightPicker store={ this.props.store } />
-        <FlightResults store={ this.props.store } />
+        <FlightPicker />
+        <FlightResults />
       </div>
     );
   }
-
 }
 
-export default Application;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => {
+      dispatch({ type: 'FETCH_BOOKING_DATA' });
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Application);
