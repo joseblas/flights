@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './css/boarding-pass.css';
 
-class BoardingPass extends Component {
+const BoardingPass = ({ currency, price }) => {
 
-  render() {
-    return (
-      <div className="boarding-pass">
-        { this.props.currency } { this.props.price.toFixed(2) }
-      </div>
-    );
-  }
+  return (
+    <div className="boarding-pass">
+      { currency } { price.toFixed(2) }
+    </div>
+  );
 
-}
+};
 
 export default BoardingPass;

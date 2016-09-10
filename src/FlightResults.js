@@ -9,7 +9,7 @@ class FlightResults extends Component {
     const state = this.props.store.getState();
 
     let { flights } = state.flights.data;
-    flights.sort((a, b) => a.price - b.price );
+    flights.sort((a, b) => a.price - b.price);
 
     if (flights.length === 0) {
       return (

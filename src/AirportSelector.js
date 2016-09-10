@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class AirportSelector extends Component {
+const AirportSelector = ({ type, title, value, airports, origin, routes, onChange }) => {
 
-  getValidAirports() {
+  const getValidAirports = () => {
 
     let validAirports = [];
-    const { airports } = this.props;
 
     if (airports) {
 
       validAirports = [...airports];
-      const { type, origin, routes } = this.props;
 
       if (type === 'destination' && origin && routes) {
-
         validAirports = validAirports.filter(airport =>
           routes[origin].includes(airport.iataCode)
         );
-
       }
 
     }
@@ -26,10 +22,10 @@ class AirportSelector extends Component {
 
   }
 
-  getOptions() {
+  const getOptions = () => {
 
     let markup = '';
-    const airports = this.getValidAirports();
+    const airports = getValidAirports();
 
     markup = airports.map(airport =>
       <option key={ airport.iataCode } value={ airport.iataCode }>{ airport.name }</option>
@@ -39,15 +35,13 @@ class AirportSelector extends Component {
 
   }
 
-  render() {
-    return (
-      <select className="standard-input" value={ this.props.value } onChange={ this.props.onChange }>
-        <option value="">{ this.props.title }</option>
-        { this.getOptions() }
-      </select>
-    );
-  }
+  return (
+    <select className="standard-input" value={ value } onChange={ onChange }>
+      <option value="">{ title }</option>
+      { getOptions() }
+    </select>
+  );
 
-}
+};
 
 export default AirportSelector;

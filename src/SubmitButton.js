@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class SubmitButton extends Component {
+const SubmitButton = ({ value, disabled, onClick }) => {
 
-  render() {
-    return (
-      <button className="standard-button" disabled={ this.props.disabled } onClick={ this.props.onClick }>
-        { this.props.value }
-      </button>
-    );
+  return (
+    <button className="standard-button" disabled={ disabled } onClick={ onClick }>
+      { value }
+    </button>
+  );
 
-  }
-
-}
+};
 
 export default SubmitButton;
