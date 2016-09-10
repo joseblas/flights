@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import FlightPicker from './FlightPicker';
 import FlightResults from './FlightResults';
 
-class App extends Component {
+class Application extends Component {
 
   componentDidMount() {
     this.props.store.dispatch({
@@ -24,4 +24,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default Application;
