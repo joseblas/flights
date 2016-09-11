@@ -28,7 +28,7 @@ class FlightPicker extends Component {
 
           <AirportSelector
             type="origin"
-            title="From"
+            title="From:"
             value={ origin }
             airports={ airports }
             onChange={ this.props.originChanged.bind(this) }
@@ -36,7 +36,7 @@ class FlightPicker extends Component {
 
           <AirportSelector
             type="destination"
-            title="To"
+            title="To:"
             value={ destination }
             airports={ airports }
             origin={ origin }
@@ -49,12 +49,12 @@ class FlightPicker extends Component {
         <div className="flight-picker__row">
 
           <DatePicker
-            placeholder="From Date"
+            placeholder="Fly Out"
             onSelect={ this.props.fromDateChanged.bind(this) }
            />
 
           <DatePicker
-            placeholder="To Date"
+            placeholder="Fly Back"
             onSelect={ this.props.toDateChanged.bind(this) }
           />
 

@@ -1,0 +1,16 @@
+.pika-button:hover {
+  color: #666666;
+  background: #F5F5F5;
+}
+
+.is-today .pika-button {
+  color: #666666;
+  font-weight: normal;
+}
+
+.is-selected .pika-button,
+.is-selected.is-today .pika-button {
+  color: white;
+  background: #2591E4;
+  font-weight: normal;
+}

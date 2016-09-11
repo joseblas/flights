@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pikaday from 'pikaday';
 import 'pikaday/css/pikaday.css';
+import './css/pikaday-theme.css';
 
 class DatePicker extends Component {
 
