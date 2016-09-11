@@ -1,7 +1,8 @@
 .boarding-pass {
   margin: 20px 0;
-  padding: 40px 20px;
+  padding: 20px;
   background: snow;
+  border-radius: 8px;
   border: 1px solid #2994E6;
   transition: all 0.15s ease-in-out;
 }

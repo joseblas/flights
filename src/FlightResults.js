@@ -13,13 +13,19 @@ class FlightResults extends Component {
     if (flights.length === 0) {
       return (
         <div className="boarding-pass">
-          No flights available
+          <p>No flights available</p>
         </div>
       );
     }
 
     return flights.map((flight, index) => (
-      <BoardingPass key={ index } currency={ flight.currency } price={ flight.price } />
+      <BoardingPass
+        key={ index }
+        currency={ flight.currency }
+        price={ flight.price }
+        dateFrom={ flight.dateFrom }
+        dateTo={ flight.dateTo }
+      />
     ));
 
   }
