@@ -110,10 +110,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: datetime
       });
     },
-    fetchFlights: (origin, destination, fromDate, toDate) => {
+    fetchFlights: () => {
       dispatch({
-        type: 'FETCH_FLIGHTS',
-        payload: { origin, destination, fromDate, toDate }
+        type: 'FETCH_FLIGHTS'
       });
     }
   }

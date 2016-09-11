@@ -5,7 +5,7 @@ const AirportSelector = ({ type, title, value, airports, origin, routes, onChang
   const getValidAirports = () => {
 
     let validAirports = airports || [];
-    
+
     if (type === 'destination' && origin && routes) {
       validAirports = validAirports.filter(airport =>
         routes[origin].includes(airport.iataCode)
@@ -22,7 +22,7 @@ const AirportSelector = ({ type, title, value, airports, origin, routes, onChang
     const airports = getValidAirports();
 
     markup = airports.map(airport =>
-      <option key={ airport.iataCode } value={ airport.iataCode }>{ airport.name }</option>
+      <option key={ airport.iataCode } value={ airport.iataCode } defaultValue="">{ airport.name }</option>
     );
 
     return markup;
@@ -31,7 +31,7 @@ const AirportSelector = ({ type, title, value, airports, origin, routes, onChang
 
   return (
     <select className="standard-input" value={ value } onChange={ onChange }>
-      <option value="">{ title }</option>
+      <option value="" disabled>{ title }</option>
       { getOptions() }
     </select>
   );

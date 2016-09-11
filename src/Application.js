@@ -7,7 +7,9 @@ import FlightResults from './FlightResults';
 class Application extends Component {
 
   componentDidMount() {
-    this.props.fetchData();
+    this.props.dispatch({
+      type: 'FETCH_BOOKING_DATA'
+    });
   }
 
   render() {
@@ -21,12 +23,4 @@ class Application extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchData: () => {
-      dispatch({ type: 'FETCH_BOOKING_DATA' });
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Application);
+export default connect()(Application);
