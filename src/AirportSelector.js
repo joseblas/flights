@@ -4,18 +4,12 @@ const AirportSelector = ({ type, title, value, airports, origin, routes, onChang
 
   const getValidAirports = () => {
 
-    let validAirports = [];
-
-    if (airports) {
-
-      validAirports = [...airports];
-
-      if (type === 'destination' && origin && routes) {
-        validAirports = validAirports.filter(airport =>
-          routes[origin].includes(airport.iataCode)
-        );
-      }
-
+    let validAirports = airports || [];
+    
+    if (type === 'destination' && origin && routes) {
+      validAirports = validAirports.filter(airport =>
+        routes[origin].includes(airport.iataCode)
+      );
     }
 
     return validAirports;
