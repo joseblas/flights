@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Header from './Header';
 import FlightPicker from './FlightPicker';
 import FlightResults from './FlightResults';
 
@@ -12,9 +13,7 @@ class Application extends Component {
   render() {
     return (
       <div className="application">
-        <header className="main-header">
-
-        </header>
+        <Header />
         <FlightPicker />
         <FlightResults />
       </div>
