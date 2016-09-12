@@ -8,8 +8,8 @@ import './css/flight-picker.css';
 class FlightPicker extends Component {
 
   findFlights() {
-    const { origin, destination, fromDate, toDate } = this.props.basket;
-    this.props.fetchFlights(origin, destination, fromDate, toDate);
+    const { basket } = this.props;
+    this.props.fetchFlights(basket);
   }
 
   render() {
@@ -110,9 +110,10 @@ const mapDispatchToProps = (dispatch) => {
         payload: datetime
       });
     },
-    fetchFlights: () => {
+    fetchFlights: (basket) => {
       dispatch({
-        type: 'FETCH_FLIGHTS'
+        type: 'FETCH_FLIGHTS',
+        payload: basket
       });
     }
   }
