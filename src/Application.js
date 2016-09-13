@@ -13,9 +13,13 @@ class Application extends Component {
   }
 
   render() {
+
+    const { booking, flights } = this.props;
+    const isLoading = (booking.isFetching || flights.isFetching);
+    
     return (
       <div className="application">
-        <Header />
+        <Header isLoading={ isLoading } />
         <FlightPicker />
         <FlightResults />
       </div>
@@ -23,4 +27,11 @@ class Application extends Component {
   }
 }
 
-export default connect()(Application);
+const mapStateToProps = (state) => {
+  return {
+    booking: state.booking,
+    flights: state.flights
+  }
+}
+
+export default connect(mapStateToProps)(Application);
