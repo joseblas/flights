@@ -8,7 +8,7 @@ import { fetchBookingData } from './actions/booking';
 class Application extends Component {
 
   componentDidMount() {
-    this.props.dispatch(fetchBookingData());
+    this.props.fetchBookingData();
   }
 
   render() {
@@ -31,6 +31,14 @@ const mapStateToProps = (state) => {
     booking: state.booking,
     flights: state.flights
   }
-}
+};
 
-export default connect(mapStateToProps)(Application);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchBookingData: () => {
+      dispatch(fetchBookingData());
+    }
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Application);
