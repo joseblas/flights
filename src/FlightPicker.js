@@ -3,14 +3,10 @@ import { connect } from 'react-redux';
 import AirportSelector from './AirportSelector';
 import DatePicker from './DatePicker';
 import SubmitButton from './SubmitButton';
+import { fetchFlights } from './actions/flights';
 import './css/flight-picker.css';
 
 class FlightPicker extends Component {
-
-  findFlights() {
-    const { basket } = this.props;
-    this.props.fetchFlights(basket);
-  }
 
   render() {
 
@@ -65,7 +61,7 @@ class FlightPicker extends Component {
           <SubmitButton
             value="Find Flights"
             disabled={ isDisabled }
-            onClick={ this.findFlights.bind(this) }
+            onClick={ this.props.fetchFlights.bind(this) }
           />
 
         </div>
@@ -110,11 +106,8 @@ const mapDispatchToProps = (dispatch) => {
         payload: datetime
       });
     },
-    fetchFlights: (basket) => {
-      dispatch({
-        type: 'FETCH_FLIGHTS',
-        payload: basket
-      });
+    fetchFlights: () => {
+      dispatch(fetchFlights());
     }
   }
 }

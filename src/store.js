@@ -1,5 +1,5 @@
-import { createStore } from 'redux';
-import { combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import basket from './reducers/basket';
 import booking from './reducers/booking';
 import flights from './reducers/flights';
@@ -10,6 +10,11 @@ const reducers = combineReducers({
   flights
 });
 
-const store = createStore(reducers);
+const middleware = applyMiddleware(thunk);
+
+const store = createStore(
+  reducers,
+  middleware
+);
 
 export default store;
