@@ -1,4 +1,5 @@
 import store from '../src/store.js';
+import { updateOrigin, updateDestination, updateFromDate, updateToDate } from '../src/actions/basket';
 
 describe('Redux Reducers', () => {
 
@@ -8,10 +9,7 @@ describe('Redux Reducers', () => {
 
       const origin = 'DUB';
 
-      store.dispatch({
-        type: 'UPDATE_ORIGIN',
-        payload: origin
-      });
+      store.dispatch(updateOrigin(origin));
 
       const state = store.getState();
       const { basket } = state;
@@ -24,10 +22,7 @@ describe('Redux Reducers', () => {
 
       const destination = 'FRA';
 
-      store.dispatch({
-        type: 'UPDATE_DESTINATION',
-        payload: destination
-      });
+      store.dispatch(updateDestination(destination));
 
       const state = store.getState();
       const { basket } = state;
@@ -41,15 +36,8 @@ describe('Redux Reducers', () => {
       const origin = 'DUB';
       const destination = 'FRA';
 
-      store.dispatch({
-        type: 'UPDATE_DESTINATION',
-        payload: destination
-      });
-
-      store.dispatch({
-        type: 'UPDATE_ORIGIN',
-        payload: origin
-      });
+      store.dispatch(updateDestination(destination));
+      store.dispatch(updateOrigin(origin));
 
       const state = store.getState();
       const { basket } = state;
@@ -62,10 +50,7 @@ describe('Redux Reducers', () => {
 
       const fromDate = '17/04/1987';
 
-      store.dispatch({
-        type: 'UPDATE_FROM_DATE',
-        payload: fromDate
-      });
+      store.dispatch(updateFromDate(fromDate));
 
       const state = store.getState();
       const { basket } = state;
@@ -78,10 +63,7 @@ describe('Redux Reducers', () => {
 
       const toDate = '17/04/1987';
 
-      store.dispatch({
-        type: 'UPDATE_TO_DATE',
-        payload: toDate
-      });
+      store.dispatch(updateToDate(toDate));
 
       const state = store.getState();
       const { basket } = state;

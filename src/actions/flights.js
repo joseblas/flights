@@ -1,11 +1,23 @@
 import axios from 'axios';
+import { FETCH_FLIGHTS_PENDING, FETCH_FLIGHTS_FULFILLED } from '../actionTypes';
+
+const fetchFlightsPending = () => {
+  return {
+    type: FETCH_FLIGHTS_PENDING
+  }
+};
+
+const fetchFlightsFulfilled = (data) => {
+  return {
+    type: FETCH_FLIGHTS_FULFILLED,
+    payload: data
+  }
+};
 
 export const fetchFlights = () => {
   return (dispatch, getState) => {
 
-    dispatch({
-      type: 'FETCH_FLIGHTS'
-    });
+    dispatch(fetchFlightsPending());
 
     const { basket } = getState();
     const { origin, destination, fromDate, toDate } = basket;
@@ -14,10 +26,7 @@ export const fetchFlights = () => {
     const requestURL = `${ baseURL }/flights/from/${ origin }/to/${ destination }/${ fromDate }/${ toDate }/250/unique/?limit=15&offset-0`;
 
     axios.get(requestURL).then((response) => {
-      dispatch({
-        type: 'FETCH_FLIGHTS_DONE',
-        payload: response.data
-      });
+      dispatch(fetchFlightsFulfilled(response.data));
     });
 
   };

@@ -4,6 +4,7 @@ import AirportSelector from './AirportSelector';
 import DatePicker from './DatePicker';
 import SubmitButton from './SubmitButton';
 import { fetchFlights } from './actions/flights';
+import { updateOrigin, updateDestination, updateFromDate, updateToDate } from './actions/basket';
 import './css/flight-picker.css';
 
 class FlightPicker extends Component {
@@ -83,28 +84,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     originChanged: (event) => {
-      dispatch({
-        type: 'UPDATE_ORIGIN',
-        payload: event.target.value
-      });
+      const { value } = event.target;
+      dispatch(updateOrigin(value));
     },
     destinationChanged: (event) => {
-      dispatch({
-        type: 'UPDATE_DESTINATION',
-        payload: event.target.value
-      });
+      const { value } = event.target;
+      dispatch(updateDestination(value));
     },
-    fromDateChanged: (datetime) => {
-      dispatch({
-        type: 'UPDATE_FROM_DATE',
-        payload: datetime
-      });
+    fromDateChanged: (date) => {
+      dispatch(updateFromDate(date));
     },
-    toDateChanged: (datetime) => {
-      dispatch({
-        type: 'UPDATE_TO_DATE',
-        payload: datetime
-      });
+    toDateChanged: (date) => {
+      dispatch(updateToDate(date));
     },
     fetchFlights: () => {
       dispatch(fetchFlights());
