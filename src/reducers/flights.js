@@ -1,5 +1,4 @@
-import { FETCH_FLIGHTS_PENDING, FETCH_FLIGHTS_FULFILLED } from '../actionTypes';
-import { UPDATE_ORIGIN, UPDATE_DESTINATION, UPDATE_FROM_DATE, UPDATE_TO_DATE } from '../actionTypes';
+import * as types from '../actionTypes';
 
 const initalState = {
   isFetching: false,
@@ -11,10 +10,10 @@ const flights = (state = initalState, action) => {
 
   switch (action.type) {
 
-    case UPDATE_ORIGIN:
-    case UPDATE_DESTINATION:
-    case UPDATE_FROM_DATE:
-    case UPDATE_TO_DATE:
+    case types.UPDATE_ORIGIN:
+    case types.UPDATE_DESTINATION:
+    case types.UPDATE_FROM_DATE:
+    case types.UPDATE_TO_DATE:
 
       state = {
         ...state,
@@ -25,7 +24,7 @@ const flights = (state = initalState, action) => {
 
       return state;
 
-    case FETCH_FLIGHTS_PENDING:
+    case types.FETCH_FLIGHTS_PENDING:
 
       state = {
         ...state,
@@ -34,7 +33,7 @@ const flights = (state = initalState, action) => {
 
       return state;
 
-    case FETCH_FLIGHTS_FULFILLED:
+    case types.FETCH_FLIGHTS_FULFILLED:
 
       state = {
         ...state,

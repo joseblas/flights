@@ -1,4 +1,4 @@
-import { FETCH_BOOKING_DATA_PENDING, FETCH_BOOKING_DATA_FULFILLED } from '../actionTypes';
+import * as types from '../actionTypes';
 
 const initalState = {
   isFetching: false,
@@ -10,7 +10,7 @@ const booking = (state = initalState, action) => {
 
   switch (action.type) {
 
-    case FETCH_BOOKING_DATA_PENDING:
+    case types.FETCH_BOOKING_DATA_PENDING:
 
       state = {
         ...state,
@@ -19,7 +19,7 @@ const booking = (state = initalState, action) => {
 
       return state;
 
-    case FETCH_BOOKING_DATA_FULFILLED:
+    case types.FETCH_BOOKING_DATA_FULFILLED:
 
       state = {
         ...state,

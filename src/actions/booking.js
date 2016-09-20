@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { FETCH_BOOKING_DATA_PENDING, FETCH_BOOKING_DATA_FULFILLED } from '../actionTypes';
+import * as types from '../actionTypes';
 
 const fetchBookingDataPending = () => {
   return {
-    type: FETCH_BOOKING_DATA_PENDING
+    type: types.FETCH_BOOKING_DATA_PENDING
   }
 };
 
 const fetchBookingDataFulfilled = (data) => {
   return {
-    type: FETCH_BOOKING_DATA_FULFILLED,
+    type: types.FETCH_BOOKING_DATA_FULFILLED,
     payload: data
   }
 };

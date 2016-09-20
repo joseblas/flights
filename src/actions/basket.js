@@ -1,29 +1,29 @@
-import { UPDATE_ORIGIN, UPDATE_DESTINATION, UPDATE_FROM_DATE, UPDATE_TO_DATE } from '../actionTypes';
+import * as types from '../actionTypes';
 
 export const updateOrigin = (origin) => {
   return {
-    type: UPDATE_ORIGIN,
+    type: types.UPDATE_ORIGIN,
     payload: origin
   }
 };
 
 export const updateDestination = (destination) => {
   return {
-    type: UPDATE_DESTINATION,
+    type: types.UPDATE_DESTINATION,
     payload: destination
   }
 };
 
 export const updateFromDate = (date) => {
   return {
-    type: UPDATE_FROM_DATE,
+    type: types.UPDATE_FROM_DATE,
     payload: date
   }
 };
 
 export const updateToDate = (date) => {
   return {
-    type: UPDATE_TO_DATE,
+    type: types.UPDATE_TO_DATE,
     payload: date
   }
 };

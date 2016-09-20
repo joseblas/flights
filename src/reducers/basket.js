@@ -1,4 +1,4 @@
-import { UPDATE_ORIGIN, UPDATE_DESTINATION, UPDATE_FROM_DATE, UPDATE_TO_DATE } from '../actionTypes';
+import * as types from '../actionTypes';
 
 const initalState = {
   origin: 'DUB',
@@ -11,7 +11,7 @@ const basket = (state = initalState, action) => {
 
   switch (action.type) {
 
-    case UPDATE_ORIGIN:
+    case types.UPDATE_ORIGIN:
 
       state = {
         ...state,
@@ -21,7 +21,7 @@ const basket = (state = initalState, action) => {
 
       return state;
 
-    case UPDATE_DESTINATION:
+    case types.UPDATE_DESTINATION:
 
       state = {
         ...state,
@@ -30,7 +30,7 @@ const basket = (state = initalState, action) => {
 
       return state;
 
-    case UPDATE_FROM_DATE:
+    case types.UPDATE_FROM_DATE:
 
       state = {
         ...state,
@@ -39,7 +39,7 @@ const basket = (state = initalState, action) => {
 
       return state;
 
-    case UPDATE_TO_DATE:
+    case types.UPDATE_TO_DATE:
 
       state = {
         ...state,
