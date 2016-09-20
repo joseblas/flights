@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import AirportSelector from './AirportSelector';
 import DatePicker from './DatePicker';
 import SubmitButton from './SubmitButton';
@@ -9,64 +10,90 @@ import './css/flight-picker.css';
 
 class FlightPicker extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { shaking: false };
+  }
+
+  validateForm() {
+
+    const { basket } = this.props;
+    const { origin, destination, fromDate, toDate } = basket;
+
+    if (origin && destination && fromDate && toDate) {
+
+      this.props.fetchFlights();
+
+    } else {
+      
+      this.setState({ shaking: true });
+
+      setTimeout(() => {
+        this.setState({ shaking: false });
+      }, 500);
+
+    }
+
+  }
+
   render() {
 
     const { basket, booking } = this.props;
 
-    const { origin, destination, fromDate, toDate } = basket;
+    const { origin, destination } = basket;
     const { airports, routes } = booking.data;
 
-    const isDisabled = !(origin && destination && fromDate && toDate);
+    const errorClass = classNames({
+      'shake': this.state.shaking
+    });
 
     return (
       <div className="flight-picker">
+        <div className={ errorClass }>
+          <div className="flight-picker__row">
 
-        <div className="flight-picker__row">
+            <AirportSelector
+              type="origin"
+              title="From:"
+              value={ origin }
+              airports={ airports }
+              onChange={ this.props.originChanged }
+            />
 
-          <AirportSelector
-            type="origin"
-            title="From:"
-            value={ origin }
-            airports={ airports }
-            onChange={ this.props.originChanged.bind(this) }
-          />
+            <AirportSelector
+              type="destination"
+              title="To:"
+              value={ destination }
+              airports={ airports }
+              origin={ origin }
+              routes={ routes }
+              onChange={ this.props.destinationChanged }
+            />
 
-          <AirportSelector
-            type="destination"
-            title="To:"
-            value={ destination }
-            airports={ airports }
-            origin={ origin }
-            routes={ routes }
-            onChange={ this.props.destinationChanged.bind(this) }
-          />
+          </div>
+          <div className="flight-picker__row">
 
+            <DatePicker
+              placeholder="Fly Out"
+              onSelect={ this.props.fromDateChanged }
+             />
+
+            <DatePicker
+              placeholder="Fly Back"
+              onSelect={ this.props.toDateChanged }
+            />
+
+          </div>
+          <div className="flight-picker__row">
+
+            <SubmitButton
+              value="Find Flights"
+              disabled={ this.state.shaking }
+              onClick={ this.validateForm.bind(this) }
+            />
+
+          </div>
         </div>
-
-        <div className="flight-picker__row">
-
-          <DatePicker
-            placeholder="Fly Out"
-            onSelect={ this.props.fromDateChanged.bind(this) }
-           />
-
-          <DatePicker
-            placeholder="Fly Back"
-            onSelect={ this.props.toDateChanged.bind(this) }
-          />
-
-        </div>
-
-        <div className="flight-picker__row">
-
-          <SubmitButton
-            value="Find Flights"
-            disabled={ isDisabled }
-            onClick={ this.props.fetchFlights.bind(this) }
-          />
-
-        </div>
-
       </div>
     );
 
