@@ -1,4 +1,4 @@
-# Ryanair - Flight Finder
+# Flight Finder
 
 > React / Redux application using the Ryanair API
 
