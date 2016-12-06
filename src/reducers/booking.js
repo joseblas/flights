@@ -12,23 +12,19 @@ const booking = (state = initalState, action) => {
 
     case types.FETCH_BOOKING_DATA_PENDING:
 
-      state = {
+      return {
         ...state,
         isFetching: true
       };
 
-      return state;
-
     case types.FETCH_BOOKING_DATA_FULFILLED:
 
-      state = {
+      return {
         ...state,
         fetched: true,
         isFetching: false,
         data: action.payload
       };
-
-      return state;
 
     default: return state;
 

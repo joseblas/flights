@@ -13,40 +13,32 @@ const basket = (state = initalState, action) => {
 
     case types.UPDATE_ORIGIN:
 
-      state = {
+      return {
         ...state,
         destination: '',
         origin: action.payload
       };
 
-      return state;
-
     case types.UPDATE_DESTINATION:
 
-      state = {
+      return {
         ...state,
         destination: action.payload
       };
 
-      return state;
-
     case types.UPDATE_FROM_DATE:
 
-      state = {
+      return {
         ...state,
         fromDate: action.payload
       };
 
-      return state;
-
     case types.UPDATE_TO_DATE:
 
-      state = {
+      return {
         ...state,
         toDate: action.payload
       };
-
-      return state;
 
     default: return state;
 
