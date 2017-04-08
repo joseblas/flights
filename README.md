@@ -2,7 +2,7 @@
 
 > React / Redux application using the Ryanair API
 
-https://www.endaquigley.com/sandbox/flight-finder
+https://enda.ie/sandbox/flight-finder
 
 ## Getting Started
 
