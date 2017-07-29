@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import AirportSelector from './AirportSelector';
 import DatePicker from './DatePicker';
+import Months from './Months';
 import SubmitButton from './SubmitButton';
 import { fetchFlights } from './actions/flights';
-import { updateOrigin, updateDestination, updateFromDate, updateToDate } from './actions/basket';
+import { updateOrigin, updateDestination, updateFromDate, updateToDate, updateMonths } from './actions/basket';
 import './css/flight-picker.css';
 
 class FlightPicker extends Component {
@@ -18,9 +19,10 @@ class FlightPicker extends Component {
   validateForm() {
 
     const { basket } = this.props;
-    const { origin, destination, fromDate, toDate } = basket;
+    const { origin, destination, fromDate, toDate, months } = basket;
+    // const { origin } = basket;
 
-    if (origin && destination && fromDate && toDate) {
+    if (origin) {
 
       this.props.fetchFlights();
 
@@ -60,7 +62,7 @@ class FlightPicker extends Component {
               onChange={ this.props.originChanged }
             />
 
-            <AirportSelector
+            {/* <AirportSelector
               type="destination"
               title="To:"
               value={ destination }
@@ -68,22 +70,26 @@ class FlightPicker extends Component {
               origin={ origin }
               routes={ routes }
               onChange={ this.props.destinationChanged }
-            />
+            /> */}
 
           </div>
-          <div className="flight-picker__row">
+           <div className="flight-picker__row">
 
             <DatePicker
               placeholder="Fly Out"
               onSelect={ this.props.fromDateChanged }
              />
 
-            <DatePicker
+            {/* <DatePicker
               placeholder="Fly Back"
               onSelect={ this.props.toDateChanged }
+            /> */}
+            <Months
+             placeholder="until"
+             onChange= {this.props.untilMonthsChanged}
             />
 
-          </div>
+          </div> 
           <div className="flight-picker__row">
 
             <SubmitButton
@@ -126,6 +132,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchFlights: () => {
       dispatch(fetchFlights());
+    },
+    untilMonthsChanged: (event) => {
+      const { value } = event.target;
+      dispatch(updateMonths(value))
     }
   }
 }

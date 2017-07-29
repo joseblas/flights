@@ -15,6 +15,7 @@ export const updateDestination = (destination) => {
 };
 
 export const updateFromDate = (date) => {
+  
   return {
     type: types.UPDATE_FROM_DATE,
     payload: date
@@ -27,3 +28,10 @@ export const updateToDate = (date) => {
     payload: date
   }
 };
+
+export const updateMonths = (months) => {
+  return {
+    type: types.MONTH_UPDATE,
+    payload: months
+  }
+}

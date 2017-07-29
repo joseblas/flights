@@ -4,9 +4,9 @@ import BoardingPass from './BoardingPass';
 import './css/flight-results.css';
 
 class FlightResults extends Component {
-
+ 
   getBoardingPasses() {
-
+    
     let { flights } = this.props.flights.data;
     flights.sort((a, b) => a.price - b.price);
 

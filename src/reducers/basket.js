@@ -1,16 +1,22 @@
 import * as types from '../actionTypes';
 
 const initalState = {
-  origin: 'DUB',
+  origin: 'SVQ',
   destination: '',
   fromDate: '',
-  toDate: ''
+  toDate: '',
+  months: '3'
 }
 
 const basket = (state = initalState, action) => {
 
   switch (action.type) {
-
+    case types.MONTH_UPDATE:
+    
+      return {
+        ...state,
+        months: action.payload
+      }
     case types.UPDATE_ORIGIN:
 
       return {
