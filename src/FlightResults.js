@@ -9,7 +9,7 @@ class FlightResults extends Component {
     
     let { flights } = this.props.flights.data;
     flights.sort((a, b) => a.price - b.price);
-
+    console.log(flights.length)
     if (flights.length === 0) {
       return (
         <div className="boarding-pass">
@@ -17,8 +17,15 @@ class FlightResults extends Component {
         </div>
       );
     }
+     flights.map((flight, index) => (
+      //  if(flight.currency){
+          console.log(flight.currency)
+      //  }else{
+        //  console.log(flight)
+      //  }
+     ));
 
-    return flights.map((flight, index) => (
+    return flights.pop().map((flight, index) => (
       <BoardingPass
         key={ index }
         currency={ flight.currency }

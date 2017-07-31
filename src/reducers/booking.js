@@ -2,7 +2,7 @@ import * as types from '../actionTypes';
 
 const initalState = {
   isFetching: false,
-  fetched: false,
+  fetched: true,
   data: {}
 }
 

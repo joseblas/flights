@@ -19,7 +19,7 @@ function getWeekends(months){
   upTo.setDate( upTo.getDate() + 30 * months)
   var daysOfYear = [];
   for (var d = new Date(); d <= upTo; d.setDate(d.getDate() + 1)) {
-    if( d.getDay() == 5)
+    if( d.getDay() === 5)
     daysOfYear.push( new Date(d) )
   }
   return daysOfYear;

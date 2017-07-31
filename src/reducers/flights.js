@@ -30,12 +30,14 @@ const flights = (state = initalState, action) => {
       };
 
     case types.FETCH_FLIGHTS_FULFILLED:
-
+      console.log(action.payload, state.data)
+      const f = action.payload.flights.concat(state.data.flights)
+      console.log({"flights": f}) 
       return {
         ...state,
         fetched: true,
         isFetching: false,
-        data: action.payload
+        data: {"flights": f}
       };
 
     default: return state;
