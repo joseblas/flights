@@ -50,9 +50,11 @@ class FlightPicker extends Component {
     });
 
     return (
-      <div className="flight-picker">
-        <div className={ errorClass }>
+      <div >
+        {/* className="flight-picker" */}
+        <div className={errorClass}>
           <div className="flight-picker__row">
+            {/* className="flight-picker__row" */}
 
             <AirportSelector
               type="origin"
@@ -74,6 +76,7 @@ class FlightPicker extends Component {
 
           </div>
            <div className="flight-picker__row">
+             {/* className="flight-picker__row" */}
 
             <DatePicker
               placeholder="Fly Out"
@@ -84,6 +87,8 @@ class FlightPicker extends Component {
               placeholder="Fly Back"
               onSelect={ this.props.toDateChanged }
             /> */}
+             </div>
+          <div className="flight-picker__row">
             <Months
              placeholder="until"
              onChange= {this.props.untilMonthsChanged}

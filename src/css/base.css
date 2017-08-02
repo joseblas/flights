@@ -25,11 +25,13 @@ body {
   background: white;
   min-height: 40px;
   min-width: 259px;
-  margin: 10px;
-  padding: 0 10px;
+  max-width: 359px;
+  margin: 10px 10px 0px 10px;
+  padding: 10px 10px 0px 10px;
   border-radius: 0;
   border: 1px solid #1E76BE;
   vertical-align: middle;
+  display: inline-block;
 }
 
 .standard-button {

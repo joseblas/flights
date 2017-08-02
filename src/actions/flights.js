@@ -14,9 +14,9 @@ const fetchFlightsFulfilled = (data) => {
   }
 };
 
-function getWeekends(months){
+function getWeekends(days){
   var upTo = new Date();
-  upTo.setDate( upTo.getDate() + 30 * months)
+  upTo.setDate( upTo.getDate() +  days)
   var daysOfYear = [];
   for (var d = new Date(); d <= upTo; d.setDate(d.getDate() + 1)) {
     if( d.getDay() === 5)
@@ -24,6 +24,10 @@ function getWeekends(months){
   }
   return daysOfYear;
 }
+
+var dateFormat = require('dateformat');
+const format = "yyyy-mm-dd"
+
 
 export const fetchFlights = () => {
   return (dispatch, getState) => {
@@ -36,9 +40,7 @@ export const fetchFlights = () => {
     console.log( "months ", months , origin, fromDate)
     
     const baseURL = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2';
-    
-    
-    // console.log(toDate)
+    const baseURL3 = "https://api.ryanair.com/farefinder/3";
     
     axios.get("https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/").then( (response) => {
       console.log(" Destination list", response.data.routes)
@@ -46,16 +48,23 @@ export const fetchFlights = () => {
       dest.forEach(function(element) {
         weekends.forEach(function(day){
           const sunday = new Date(day.getTime())
-          sunday.setDate(day.getDate() + 2)
-          const requestURL = `${ baseURL }/flights/from/${ origin }/to/${ element }/${ day }/${ sunday }/250/unique/?limit=15&offset-0`;
-          axios.get(requestURL).then((response) => {
+          const f = dateFormat( day, format)
+          const s = dateFormat( sunday.setDate(day.getDate() + 2), format)
+          //https://api.ryanair.com/farefinder/3/oneWayFares?&departureAirportIataCode=SVQ&language=en&limit=10&market=en-gb&offset=0
+          //&outboundDepartureDateFrom=2017-01-31&outboundDepartureDateTo=2017-02-04&arrivalAirportIataCode=PMI
+          const options = "&language=en&limit=10&market=en-gb&offset=0"
+          const requestURL = `${ baseURL3 }/oneWayFares?departureAirportIataCode=${ origin }&outboundDepartureDateFrom=${f}&outboundDepartureDateTo=${s}&arrivalAirportIataCode=${element}`;
+          // console.log(dateFormat(day, format))
+          // console.log(dateFormat(sunday, "yyyy-mm-dd"))
+          console.log("URL ", requestURL)
+          axios.get(requestURL+options).then((response) => {
              dispatch(fetchFlightsFulfilled(response.data));
           });
         });
             
       }, this);
     })
-    
+    // const requestURL = `${ baseURL }/flights/from/${ origin }/to/${ element }/${ day }/${ sunday }/250/unique/?limit=15&offset-0`;
     
     
 

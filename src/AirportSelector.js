@@ -30,7 +30,7 @@ const AirportSelector = ({ type, title, value, airports, origin, routes, onChang
   }
 
   return (
-    <select className="standard-input" value={ value } onChange={ onChange }>
+    <select className="standard-input"  value={ value } onChange={ onChange }>
       <option value="" disabled>{ title }</option>
       { getOptions() }
     </select>
