@@ -8,7 +8,11 @@ class FlightResults extends Component {
   getBoardingPasses() {
     
     let { flights } = this.props.flights.data;
-    flights.sort((a, b) => a.price - b.price);
+
+    console.log("FlightsResults: ", flights)
+    
+    
+    flights.sort((a, b) => a.summary.price.value - b.summary.price.value);
     
     if (flights.length === 0) {
       return (
@@ -18,17 +22,19 @@ class FlightResults extends Component {
       );
     }
   
-    flights.pop()// Why?
+    // flights.pop()// Why?
 
      
 
     return flights.map((flight, index) => (
       <BoardingPass
         key={ index }
-        currency={ flight.currency }
-        price={ flight.price }
-        dateFrom={ flight.dateFrom }
-        dateTo={ flight.dateTo }
+        currency={ flight.summary.price.currencySymbol }
+        price={ flight.summary.price.value }
+        dateFrom={ flight.outbound.departureDate }
+        dateTo={ flight.outbound.arrivalDate }
+        to={ flight.outbound.arrivalAirport.name }
+        from={ flight.outbound.departureAirport.name }
       />
     ));
 

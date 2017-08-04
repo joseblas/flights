@@ -40,20 +40,20 @@ export const fetchFlights = () => {
     console.log( "months ", months , origin, fromDate)
     
     const baseURL = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2';
-    const baseURL3 = "https://api.ryanair.com/farefinder/3";
+    const baseURL3 = 'https://api.ryanair.com/farefinder/3';
     
     axios.get("https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/").then( (response) => {
       console.log(" Destination list", response.data.routes)
       const dest = response.data.routes[basket.origin]
+      // const destFake = [dest[0]]
       dest.forEach(function(element) {
         weekends.forEach(function(day){
           const sunday = new Date(day.getTime())
           const f = dateFormat( day, format)
           const s = dateFormat( sunday.setDate(day.getDate() + 2), format)
-          //https://api.ryanair.com/farefinder/3/oneWayFares?&departureAirportIataCode=SVQ&language=en&limit=10&market=en-gb&offset=0
-          //&outboundDepartureDateFrom=2017-01-31&outboundDepartureDateTo=2017-02-04&arrivalAirportIataCode=PMI
           const options = "&language=en&limit=10&market=en-gb&offset=0"
           const requestURL = `${ baseURL3 }/oneWayFares?departureAirportIataCode=${ origin }&outboundDepartureDateFrom=${f}&outboundDepartureDateTo=${s}&arrivalAirportIataCode=${element}`;
+    
           // console.log(dateFormat(day, format))
           // console.log(dateFormat(sunday, "yyyy-mm-dd"))
           console.log("URL ", requestURL)
@@ -64,7 +64,7 @@ export const fetchFlights = () => {
             
       }, this);
     })
-    // const requestURL = `${ baseURL }/flights/from/${ origin }/to/${ element }/${ day }/${ sunday }/250/unique/?limit=15&offset-0`;
+    
     
     
 
