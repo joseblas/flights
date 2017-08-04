@@ -34,23 +34,21 @@ const flights = (state = initalState, action) => {
       // console.log( state.data)
       var f = state.data.flights
       if(action.payload.fares.length > 0){
-        console.log("Fare" , action.payload.fares.length)
-        console.log("Fare" , action.payload.fares)
+        // console.log("Fare" , action.payload.fares.length)
+        // console.log("Fare" , action.payload.fares)
         
         f = action.payload.fares
-        console.log("F: # ", f)
+        // console.log("F: # ", f)
         if( state.data.flights){
-          console.log("Previous data: ", state.data.flights)
+          // console.log("Previous data: ", state.data.flights)
           f = state.data.flights.concat(action.payload.fares)
-          console.log("F: # ", f)
-        }else{
-          
+          // console.log("F: # ", f)
         }
         
         
       }
       
-       console.log("Total: # ", f)
+      //  console.log("Total: # ", f)
       return {
         ...state,
         fetched: true,
