@@ -14,14 +14,21 @@ const fetchFlightsFulfilled = (data) => {
   }
 };
 
-function getWeekends(days){
-  var upTo = new Date();
-  upTo.setDate( upTo.getDate() +  days)
-  var daysOfYear = [];
-  for (var d = new Date(); d <= upTo; d.setDate(d.getDate() + 1)) {
-    if( d.getDay() === 5)
-    daysOfYear.push( new Date(d) )
+function getWeekends(fromDate, days){
+  if(!fromDate){
+    fromDate = new Date()
   }
+  var upTo = new Date()
+  console.log("days ", days * 1000 * 60 * 24)
+  upTo.setTime( fromDate.getTime() +  days * 1000 * 60 * 60 * 24)
+  var daysOfYear = [];
+  console.log("fromDate ", fromDate)
+  console.log("upTo ", upTo)
+  for (var d = new Date(fromDate); d <= upTo; d.setDate(d.getDate() + 1)) {
+    if( d.getDay() === 5)
+      daysOfYear.push( new Date(d) )
+  }
+  console.log("daysOfYear  ", daysOfYear)
   return daysOfYear;
 }
 
@@ -32,11 +39,11 @@ const format = "yyyy-mm-dd"
 export const fetchFlights = () => {
   return (dispatch, getState) => {
 
-    dispatch(fetchFlightsPending());
+    
 
     const { basket } = getState();
     const { origin, destination, fromDate, toDate, months } = basket; 
-    const weekends = getWeekends(months)
+    const weekends = getWeekends(fromDate, months)
     console.log( "months ", months , origin, fromDate)
     
     const baseURL = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2';
@@ -48,6 +55,7 @@ export const fetchFlights = () => {
       // const destFake = [dest[0]]
       dest.forEach(function(element) {
         weekends.forEach(function(day){
+          dispatch(fetchFlightsPending());
           const sunday = new Date(day.getTime())
           const f = dateFormat( day, format)
           const s = dateFormat( sunday.setDate(day.getDate() + 2), format)
