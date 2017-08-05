@@ -12,7 +12,7 @@ class FlightResults extends Component {
     console.log("FlightsResults: ", flights)
     
     
-    flights.sort((a, b) => a.summary.price.value - b.summary.price.value);
+    flights.sort((a, b) => (a[0][0].summary.price.value + a[1][0].summary.price.value) - ( b[0][0].summary.price.value+ b[1][0].summary.price.value) );
     
     if (flights.length === 0) {
       return (
@@ -29,12 +29,15 @@ class FlightResults extends Component {
     return flights.map((flight, index) => (
       <BoardingPass
         key={ index }
-        currency={ flight.summary.price.currencySymbol }
-        price={ flight.summary.price.value }
-        dateFrom={ flight.outbound.departureDate }
-        dateTo={ flight.outbound.arrivalDate }
-        to={ flight.outbound.arrivalAirport.name }
-        from={ flight.outbound.departureAirport.name }
+        currency={ flight[0][0].summary.price.currencySymbol }
+        price1={ flight[0][0].summary.price.value }
+        price2 = {flight[1][0].summary.price.value}
+        dateFrom1={ flight[0][0].outbound.departureDate }
+        dateTo1={ flight[0][0].outbound.arrivalDate }
+        dateFrom2={ flight[1][0].outbound.departureDate }
+        dateTo2={ flight[1][0].outbound.arrivalDate }
+        to={ flight[0][0].outbound.arrivalAirport.name }
+        from={ flight[0][0].outbound.departureAirport.name }
       />
     ));
 

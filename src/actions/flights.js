@@ -50,7 +50,7 @@ export const fetchFlights = () => {
     const baseURL3 = 'https://api.ryanair.com/farefinder/3';
     
     axios.get("https://murmuring-ocean-10826.herokuapp.com/en/api/2/forms/flight-booking-selector/").then( (response) => {
-      console.log(" Destination list", response.data.routes)
+      // console.log(" Destination list", response.data.routes)
       const dest = response.data.routes[basket.origin]
       // const destFake = [dest[0]]
       dest.forEach(function(element) {
@@ -60,14 +60,21 @@ export const fetchFlights = () => {
           const f = dateFormat( day, format)
           const s = dateFormat( sunday.setDate(day.getDate() + 2), format)
           const options = "&language=en&limit=10&market=en-gb&offset=0"
-          const requestURL = `${ baseURL3 }/oneWayFares?departureAirportIataCode=${ origin }&outboundDepartureDateFrom=${f}&outboundDepartureDateTo=${s}&arrivalAirportIataCode=${element}`;
-    
+          const requestURL = `${ baseURL3 }/oneWayFares?departureAirportIataCode=${ origin }&outboundDepartureDateFrom=${f}&outboundDepartureDateTo=${f}&arrivalAirportIataCode=${element}`;
+          const requestURL_return = `${ baseURL3 }/oneWayFares?departureAirportIataCode=${ element }&outboundDepartureDateFrom=${s}&outboundDepartureDateTo=${s}&arrivalAirportIataCode=${origin}`;
           // console.log(dateFormat(day, format))
           // console.log(dateFormat(sunday, "yyyy-mm-dd"))
-          console.log("URL ", requestURL)
-          axios.get(requestURL+options).then((response) => {
-             dispatch(fetchFlightsFulfilled(response.data));
-          });
+          // console.log("URL ", requestURL)
+          // console.log("URL ", requestURL_return)
+          axios.all([axios.get(requestURL+options), axios.get(requestURL_return+options)])
+          .then( (data) => {
+            console.log("Ida, ", data[0].data.size)
+            console.log("Vuelta ", data[1].data.size)
+            dispatch(fetchFlightsFulfilled([data[0].data, data[1].data]));
+          })
+          // axios.get(requestURL+options).then((response) => {
+            //  dispatch(fetchFlightsFulfilled(response.data));
+          // });
         });
             
       }, this);

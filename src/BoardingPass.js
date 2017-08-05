@@ -4,15 +4,19 @@ import {Button, Icon} from 'react-materialize'
 import './css/boarding-pass.css';
 
 
-const BoardingPass = ({ currency, price, dateFrom, dateTo, from, to }) => {
+const BoardingPass = ({ currency, price1, price2, dateFrom1, dateTo1, dateFrom2, dateTo2, from, to }) => {
 
   return (
 
     <div className="boarding-pass">
       
-      <p>Price: <strong>{ price }</strong>{ currency } &nbsp;{ moment(dateFrom).format('Do MMMM YYYY hh:mm') } => { moment(dateTo).format('hh:mm') }
+      <p>Price: <strong>{ (price1+ price2).toFixed(2) }</strong>{ currency }
+      </p>
+      <p>
+        { moment(dateFrom1).format('Do MMMM YYYY hh:mm') } => { moment(dateTo1).format('hh:mm') }
         </p>
-      <p>{from} {to}
+      <p>
+        { moment(dateFrom2).format('Do MMMM YYYY hh:mm') } => { moment(dateTo2).format('hh:mm') }
         </p>  
       {/* <p>Price: { currency } <strong>{ price.toFixed(2) }</strong></p> */}
        {/* <p>Fly Out: { moment(dateFrom).format('Do MMMM YYYY') }</p>  */}

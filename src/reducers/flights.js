@@ -30,25 +30,14 @@ const flights = (state = initalState, action) => {
       };
 
     case types.FETCH_FLIGHTS_FULFILLED:
-      // console.log(action.payload.fares)
-      // console.log( state.data)
       var f = state.data.flights
-      if(action.payload.fares.length > 0){
-        // console.log("Fare" , action.payload.fares.length)
-        // console.log("Fare" , action.payload.fares)
-        
-        f = action.payload.fares
-        // console.log("F: # ", f)
+      if(action.payload[0].fares.length > 0 && action.payload[1].fares.length > 0){
+        f = [[action.payload[0].fares,action.payload[1].fares]]
         if( state.data.flights){
-          // console.log("Previous data: ", state.data.flights)
-          f = state.data.flights.concat(action.payload.fares)
-          // console.log("F: # ", f)
+          f = state.data.flights.concat([[action.payload[0].fares,action.payload[1].fares]])
         }
-        
-        
       }
       
-      //  console.log("Total: # ", f)
       return {
         ...state,
         fetched: true,
