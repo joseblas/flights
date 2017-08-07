@@ -11,13 +11,13 @@ const BoardingPass = ({ currency, price1, price2, dateFrom1, dateTo1, dateFrom2,
     <div className="boarding-pass">
       
       <p>
-        Price: <strong>{ (price1+ price2).toFixed(2) }</strong>{ currency }
+        Price: <strong>{ (price1+ price2).toFixed(2) }</strong>{ currency } {to}
       </p>
       <p>
-        {from}:{ moment(dateFrom1).format('Do MMMM YYYY hh:mm') } => { moment(dateTo1).format('hh:mm') }
+        { moment(dateFrom1).format('Do MMMM YYYY HH:mm') } => { moment(dateTo1).format('HH:mm ZZ') }
         </p>
       <p>
-        {to}:{ moment(dateFrom2).format('Do MMMM YYYY hh:mm') } => { moment(dateTo2).format('hh:mm') }
+        { moment(dateFrom2).format('Do MMMM YYYY HH:mm') } => { moment(dateTo2).format('HH:mm ZZ') }
         </p>  
       {/* <p>Price: { currency } <strong>{ price.toFixed(2) }</strong></p> */}
        {/* <p>Fly Out: { moment(dateFrom).format('Do MMMM YYYY') }</p>  */}
