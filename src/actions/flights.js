@@ -14,16 +14,16 @@ const fetchFlightsFulfilled = (data) => {
   }
 };
 
-function getWeekends(fromDate, days){
+function getWeekends(fromDate, months){
   if(!fromDate){
     fromDate = new Date()
   }
   var upTo = new Date()
-  console.log("days ", days * 1000 * 60 * 24)
-  upTo.setTime( fromDate.getTime() +  days * 1000 * 60 * 60 * 24)
+  // console.log("days ", months * 30 * 1000 * 60 * 24)
+  upTo.setTime( fromDate.getTime() +  months * 30 * 1000 * 60 * 60 * 24)
   var daysOfYear = [];
-  console.log("fromDate ", fromDate)
-  console.log("upTo ", upTo)
+  // console.log("fromDate ", fromDate)
+  // console.log("upTo ", upTo)
   for (var d = new Date(fromDate); d <= upTo; d.setDate(d.getDate() + 1)) {
     if( d.getDay() === 5)
       daysOfYear.push( new Date(d) )
