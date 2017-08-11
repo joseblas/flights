@@ -17,7 +17,7 @@ class DatePicker extends Component {
 
   render() {
     return (
-      <input ref="datePicker" type="text" className="standard-input" placeholder={ this.props.placeholder } />
+      <input ref="datePicker" className="standard-input" placeholder={ this.props.placeholder } />
     );
   }
 
