@@ -9,20 +9,33 @@ class FlightResults extends Component {
     
     let { flights } = this.props.flights.data;
 
-    console.log("FlightsResults: ", flights)
+    // console.log("FlightsResults: ", flights)
     
-    
-    flights.sort((a, b) => (a[0][0].summary.price.value + a[1][0].summary.price.value) - ( b[0][0].summary.price.value+ b[1][0].summary.price.value) );
-    
-    if (flights.length === 0) {
+     if ( flights === undefined || flights.length === 0 ) {
       return (
         <div className="boarding-pass">
           <p>No flights available</p>
         </div>
       );
     }
+
+    flights.sort((a, b) => (a[0][0].summary.price.value + a[1][0].summary.price.value) - ( b[0][0].summary.price.value+ b[1][0].summary.price.value) );
+    
+   
   
-    // flights.pop()// Why?
+    //send results to akka
+    if( flights.length> 2){
+    flights.slice(0, 2)
+    .map((flight, index) => (
+      console.log("flight[0]", flight[1][0])
+    ))
+
+flights.slice(0, 2)
+    .map((flight, index) => (
+      console.log("flight[0]", flight[0][0])
+    ))
+
+    }
 
      
 

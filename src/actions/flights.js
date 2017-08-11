@@ -28,7 +28,7 @@ function getWeekends(fromDate, months){
     if( d.getDay() === 5)
       daysOfYear.push( new Date(d) )
   }
-  console.log("daysOfYear  ", daysOfYear)
+  // console.log("daysOfYear  ", daysOfYear)
   return daysOfYear;
 }
 
@@ -44,7 +44,7 @@ export const fetchFlights = () => {
     const { basket } = getState();
     const { origin, destination, fromDate, toDate, months } = basket; 
     const weekends = getWeekends(fromDate, months)
-    console.log( "months ", months , origin, fromDate)
+    // console.log( "months ", months , origin, fromDate)
     
     const baseURL = 'https://murmuring-ocean-10826.herokuapp.com/en/api/2';
     const baseURL3 = 'https://api.ryanair.com/farefinder/3';
@@ -68,9 +68,13 @@ export const fetchFlights = () => {
           // console.log("URL ", requestURL_return)
           axios.all([axios.get(requestURL+options), axios.get(requestURL_return+options)])
           .then( (data) => {
-            console.log("Ida, ", data[0].data.size)
-            console.log("Vuelta ", data[1].data.size)
-            dispatch(fetchFlightsFulfilled([data[0].data, data[1].data]));
+            // console.log("Ida, ", data[0].data.size)
+            // console.log("Vuelta ", data[1].data.size)
+            var going = data[0].data
+            going.created = "now"
+            console.log("Created: ", going.total)
+             console.log("Created: ", going.created)
+            dispatch(fetchFlightsFulfilled([going, data[1].data]));
           })
           // axios.get(requestURL+options).then((response) => {
             //  dispatch(fetchFlightsFulfilled(response.data));
